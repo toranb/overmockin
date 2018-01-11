@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import Immutable from 'seamless-immutable';
 
-const initialState = Immutable({
+const initialState = {
   all: undefined,
   selectedItem: undefined,
-  configuration: undefined
-});
+  configuration: undefined,
+  itemz: []
+};
 
 export default function information(state, action) {
   switch (action.type) {
@@ -28,6 +28,7 @@ export default function information(state, action) {
     case 'TOGGLE_CONFIG': {
       const config = _.mapValues(state.configuration, config => {
         if (config.id === action.id) {
+          state.itemz.push([1, 2, 3]);
           return _.defaults({
             active: !config.active
           }, config);
