@@ -1,15 +1,20 @@
 module.exports = {
+  globals: {
+    server: true,
+  },
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      'experimentalObjectRestSpread': true
+    }
   },
   plugins: [
     'ember'
   ],
   extends: [
-    'eslint:recommended',
-    'plugin:ember/recommended'
+    'eslint:recommended'
   ],
   env: {
     browser: true

@@ -1,0 +1,3 @@
+{{#each-in all as |key info|}}
+  {{#link-to "information.detail" info.id test-id="detailLink"}}{{info.name}}{{/link-to}}
+{{/each-in}}

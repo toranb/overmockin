@@ -7,6 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('information', { path: '/' }, function() {
+    this.route('detail', {path: 'detail/:selectedId'}, function() {
+      this.route('configure');
+    });
+  });
 });
 
 export default Router;

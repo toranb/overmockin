@@ -1,0 +1,14 @@
+.ember-application {
+  width: 320px;
+}
+
+.progress {
+  width: 100%;
+  background: grey;
+}
+
+.progress-bar {
+  height: 18px;
+  padding-left: 5px;
+  background-color: orange;
+}
