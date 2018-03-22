@@ -17,6 +17,7 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@ember-decorators/babel-transforms": "^2.0.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "3.0.2",
@@ -32,6 +33,8 @@
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
+    "babel-eslint": "^8.2.2",
+    "ember-decorators": "^2.0.0-beta.2",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.4.4",
     "ember-load-initializers": "^1.0.0",
