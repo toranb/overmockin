@@ -1,51 +1,46 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import waitFor from 'overmockin/tests/helpers/wait-for';
-import { startMirage } from 'overmockin/initializers/ember-cli-mirage';
-import { patchReducer, unpatchReducer } from 'overmockin/tests/helpers/patch-reducer';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, click } from '@ember/test-helpers';
+import { patchReducer } from 'overmockin/tests/helpers/patch-reducer';
 import * as informationActions from 'overmockin/actions/information';
 import sinon from 'sinon';
 
-moduleForComponent('info-configure', 'Integration | Component | info configure', {
-  integration: true,
-  beforeEach() {
-    const initState = {
-      information: {
-        itemz: [],
-        configuration: {
-          1: {
-            id: '1',
-            column: 'id',
-            active: true
-          },
-          2: {
-            id: '2',
-            column: 'name',
-            active: false
-          }
-        }
+const initState = {
+  information: {
+    itemz: [],
+    configuration: {
+      1: {
+        id: '1',
+        column: 'id',
+        active: true
+      },
+      2: {
+        id: '2',
+        column: 'name',
+        active: false
       }
-    };
-    this.server = startMirage();
-    patchReducer(initState);
-    this.inject.service('redux');
-  },
-  afterEach() {
-    this.server.shutdown();
-    unpatchReducer();
+    }
   }
-});
+};
 
-test('clicking checkbox will fire toggle action when checkbox clicked', function(assert) {
-  assert.expect(1);
+module('Integration | Component | info configure spy test', function(hooks) {
+  setupRenderingTest(hooks);
 
-  const actionStub = sinon.stub(informationActions, 'toggle');
-  actionStub.returns(() => () => {});
+  hooks.beforeEach(function() {
+    patchReducer(this, initState);
+  });
 
-  this.render(hbs`{{info-configure}}`);
+  test('clicking checkbox will fire toggle action when checkbox clicked', async function(assert) {
+    assert.expect(1);
 
-  const selector = '[test-id=configOption]:eq(1) input[type=checkbox]';
-  return waitFor(() => this.$(selector).trigger('click'))().then(() => {
+    const actionStub = sinon.stub(informationActions, 'toggle');
+    actionStub.returns(() => () => {});
+
+    await render(hbs`{{info-configure}}`);
+
+    await click('[test-id=configOption]:nth-of-type(2) input[type=checkbox]');
+
     assert.ok(actionStub.calledOnce, 'The toggle action was called once');
     actionStub.restore();
   });

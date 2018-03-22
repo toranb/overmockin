@@ -1,65 +1,69 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { patchReducer, unpatchReducer } from 'overmockin/tests/helpers/patch-reducer';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
+import { patchReducer } from 'overmockin/tests/helpers/patch-reducer';
 import { computed } from '@ember/object';
 import InfoDetailComponent from 'overmockin/components/info-detail';
-import Immutable from 'seamless-immutable';
 
-moduleForComponent('info-detail', 'Integration | Component | info detail', {
-  integration: true,
-  beforeEach() {
-    const initState = {
-      information: {
-        selectedItem: 2,
-        all: {
-          1: {
-            id: '1',
-            name: 'one'
-          },
-          2: {
-            id: '2',
-            name: 'two'
-          }
-        },
-        configuration: {
-          1: {
-            id: '1',
-            column: 'id',
-            active: true
-          },
-          2: {
-            id: '2',
-            column: 'name',
-            active: true
-          }
-        }
+const initState = {
+  information: {
+    selectedItem: 2,
+    all: {
+      1: {
+        id: '1',
+        name: 'one'
+      },
+      2: {
+        id: '2',
+        name: 'two'
       }
-    };
-    patchReducer(Immutable.from(initState));
-    this.inject.service('redux');
-  },
-  afterEach() {
-    unpatchReducer();
+    },
+    configuration: {
+      1: {
+        id: '1',
+        column: 'id',
+        active: true
+      },
+      2: {
+        id: '2',
+        column: 'name',
+        active: true
+      }
+    }
   }
-});
+};
 
-test('should render item with all fields provided', function(assert) {
-  this.render(hbs`{{info-detail}}`);
+module('Integration | Component | info detail', function(hooks) {
+  setupRenderingTest(hooks);
 
-  assert.equal(this.$('[test-id=idInfo]').text().trim(), 'id: 2');
-  assert.equal(this.$('[test-id=nameInfo]').text().trim(), 'name: two');
-  assert.equal(this.$('[test-id=configureLink]').text().trim(), 'configure');
-});
-
-test('should display all as inline style based on % of 10 items max', function(assert) {
-  let StubDetailComponent = InfoDetailComponent.extend({
-    width: computed(function() {
-      return '20';
-    })
+  hooks.beforeEach(function() {
+    patchReducer(this, initState);
   });
-  this.registry.register('component:info-detail', StubDetailComponent);
 
-  this.render(hbs`{{info-detail}}`);
+  test('should render item with all fields provided', async function(assert) {
+    assert.expect(3);
 
-  assert.equal(this.$('[test-id=all]').attr('style'), 'width: 20%');
+    await render(hbs`{{info-detail}}`);
+
+    assert.equal(find('[test-id=idInfo]').textContent, 'id: 2');
+    assert.equal(find('[test-id=nameInfo]').textContent, 'name: two');
+    assert.equal(find('[test-id=configureLink]').textContent, 'configure');
+  });
+
+  test('should display all as inline style based on % of 10 items max', async function(assert) {
+    assert.expect(1);
+
+    const StubDetailComponent = InfoDetailComponent.extend({
+      width: computed(function() {
+        return '20';
+      })
+    });
+    this.owner.register('component:info-detail', StubDetailComponent);
+
+    await render(hbs`{{info-detail}}`);
+
+    assert.equal(find('[test-id=all]').getAttribute('style'), 'width: 20%');
+  });
+
 });

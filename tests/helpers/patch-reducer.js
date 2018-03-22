@@ -1,48 +1,23 @@
-/* global require, define */
+import redux from 'redux';
+import thunk from 'redux-thunk';
+import createSaga from 'redux-saga';
+import rootSaga from 'overmockin/sagas/index';
+import reducers from 'overmockin/reducers/index';
+import ReduxService from 'ember-redux/services/redux';
+import Immutable from 'seamless-immutable';
 
-import originalService from 'overmockin/services/redux';
+const { createStore, applyMiddleware, compose } = redux;
 
-const { unsee } = require;
+export function patchReducer(context, initState) {
+  const sagaMiddleware = createSaga();
 
-export function patchReducer(initState) {
-  unsee('overmockin/services/redux');
+  const makeStoreInstance = () => {
+    const middlewares = applyMiddleware(thunk, sagaMiddleware);
+    const createStoreWithMiddleware = compose(middlewares)(createStore);
+    const store = createStoreWithMiddleware(reducers, Immutable.from(initState));
+    sagaMiddleware.run(rootSaga);
+    return store;
+  };
 
-  define('overmockin/services/redux', ['exports', 'redux', 'ember-redux/services/redux', 'redux-thunk', 'redux-saga', 'overmockin/reducers/index', 'overmockin/enhancers/index', 'overmockin/sagas/index'], function (exports, _redux, _redux2, _reduxThunk, _reduxSaga, _index, _index2, _index3) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    var createStore = _redux.default.createStore,
-        applyMiddleware = _redux.default.applyMiddleware,
-        compose = _redux.default.compose;
-
-
-    var sagaMiddleware = (0, _reduxSaga.default)();
-
-    var makeStoreInstance = function makeStoreInstance(_ref) {
-      var reducers = _ref.reducers,
-          enhancers = _ref.enhancers;
-
-      var middleware = applyMiddleware(_reduxThunk.default, sagaMiddleware);
-      var createStoreWithMiddleware = compose(middleware, enhancers)(createStore);
-      var store = createStoreWithMiddleware(reducers, initState);
-      sagaMiddleware.run(_index3.default);
-      return store;
-    };
-
-    exports.default = _redux2.default.extend({
-      reducers: _index.default,
-      enhancers: _index2.default,
-      makeStoreInstance: makeStoreInstance
-    });
-  });
-}
-
-export function unpatchReducer() {
-  unsee('overmockin/services/redux');
-
-  define('overmockin/services/redux', ['exports'], function (exports) {
-    exports['default'] = originalService;
-  });
+  context.owner.register('service:redux', ReduxService.extend({ makeStoreInstance }));
 }
