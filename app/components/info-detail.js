@@ -10,7 +10,7 @@ const stateToComputed = state => ({
 
 class InfoDetailComponent extends Component {
 
-  @computed
+  @computed('items')
   get width() {
     const items = this.get('items');
     return items ? (Object.keys(items).length / 10) * 100 : 0;
