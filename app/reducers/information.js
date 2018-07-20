@@ -1,4 +1,7 @@
-import _ from 'lodash';
+import pick from 'lodash/pick';
+import keyBy from 'lodash/keyBy';
+import defaults from 'lodash/defaults';
+import mapValues from 'lodash/mapValues';
 import { createSelector } from 'reselect';
 
 const initialState = {
@@ -11,14 +14,14 @@ const initialState = {
 export default function information(state, action) {
   switch (action.type) {
     case 'FETCH_INFO': {
-      const information = _.keyBy(action.payload.information, info => info.id);
+      const information = keyBy(action.payload.information, info => info.id);
       return {
         ...state,
         all: information
       }
     }
     case 'FETCH_CONFIG': {
-      const config = _.keyBy(action.payload.configurations, option => option.id);
+      const config = keyBy(action.payload.configurations, option => option.id);
       return {
         ...state,
         configuration: config,
@@ -26,10 +29,10 @@ export default function information(state, action) {
       }
     }
     case 'TOGGLE_CONFIG': {
-      const config = _.mapValues(state.configuration, config => {
+      const config = mapValues(state.configuration, config => {
         if (config.id === action.id) {
           state.itemz.push([1, 2, 3]);
-          return _.defaults({
+          return defaults({
             active: !config.active
           }, config);
         }
@@ -60,7 +63,7 @@ const activeItem = createSelector(
     const activeColumns = Object.values(config).reduce((prev, current) => {
       return current.active ? prev.concat(current.column) : prev;
     }, []);
-    return _.pick(items[selectedItem], activeColumns);
+    return pick(items[selectedItem], activeColumns);
   }
 );
 
