@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
 import { patchReducer } from 'overmockin/tests/helpers/patch-reducer';
-import { computed } from '@ember/object';
+import { computed } from '@ember-decorators/object';
 import InfoDetailComponent from 'overmockin/components/info-detail';
 
 const initState = {
@@ -54,11 +54,13 @@ module('Integration | Component | info detail', function(hooks) {
   test('should display all as inline style based on % of 10 items max', async function(assert) {
     assert.expect(1);
 
-    const StubDetailComponent = InfoDetailComponent.extend({
-      width: computed(function() {
+    class StubDetailComponent extends InfoDetailComponent {
+      @computed
+      get width() {
         return '20';
-      })
-    });
+      }
+    }
+
     this.owner.register('component:info-detail', StubDetailComponent);
 
     await render(hbs`{{info-detail}}`);
