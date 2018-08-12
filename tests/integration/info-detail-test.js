@@ -51,7 +51,7 @@ module('Integration | Component | info detail', function(hooks) {
     assert.equal(find('[test-id=configureLink]').textContent, 'configure');
   });
 
-  test('should display all as inline style based on % of 10 items max', async function(assert) {
+  test('should display progress with inline style based on % of 10 items max', async function(assert) {
     assert.expect(1);
 
     class StubDetailComponent extends InfoDetailComponent {
@@ -65,7 +65,7 @@ module('Integration | Component | info detail', function(hooks) {
 
     await render(hbs`{{info-detail}}`);
 
-    assert.equal(find('[test-id=all]').getAttribute('style'), 'width: 20%');
+    assert.equal(find('[test-id=progress]').getAttribute('style'), 'width: 20%');
   });
 
 });
