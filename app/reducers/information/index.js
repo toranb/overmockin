@@ -31,7 +31,7 @@ export default function information(state, action) {
     case 'TOGGLE_CONFIG': {
       const config = mapValues(state.configuration, config => {
         if (config.id === action.id) {
-          state.itemz.push([1, 2, 3]);
+          // state.itemz.push([1, 2, 3]);
           return defaults({
             active: !config.active
           }, config);

@@ -3,6 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, find, findAll } from '@ember/test-helpers';
 import { patchReducer } from 'overmockin/tests/helpers/patch-reducer';
+import { getConfiguration } from 'overmockin/reducers/information/selectors';
 import { startMirage } from 'overmockin/initializers/ember-cli-mirage';
 
 const initState = {
@@ -54,7 +55,7 @@ module('Integration | Component | info configure', function(hooks) {
     assert.equal(find('[test-id=configOption]:nth-of-type(2) input[type=checkbox]').checked, true);
 
     const redux = this.owner.lookup('service:redux');
-    const configuration = redux.getState()['information']['configuration'];
+    const configuration = getConfiguration(redux.getState());
     assert.equal(configuration['1']['active'], true);
     assert.equal(configuration['2']['active'], true);
   });

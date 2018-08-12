@@ -1,8 +1,9 @@
 import { connect } from 'ember-redux';
+import { getConfiguration } from '../reducers/information/selectors';
 import { toggle } from '../actions/information';
 
 const stateToComputed = state => ({
-  configuration: state.information.configuration
+  configuration: getConfiguration(state)
 });
 
 const dispatchToActions = {
