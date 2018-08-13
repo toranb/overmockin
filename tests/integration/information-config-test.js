@@ -31,7 +31,7 @@ module('Integration | Component | info configure spy test', function(hooks) {
     patchReducer(this, initState);
   });
 
-  test('clicking checkbox will fire toggle action when checkbox clicked', async function(assert) {
+  test('clicking the checkbox will fire toggle action', async function(assert) {
     assert.expect(1);
 
     const actionStub = sinon.stub(informationActions, 'toggle');
