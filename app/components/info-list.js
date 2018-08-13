@@ -14,6 +14,6 @@ class InfoList extends Component {
       {{/each-in}}
     `
   }
-};
+}
 
 export default connect(stateToComputed)(InfoList);

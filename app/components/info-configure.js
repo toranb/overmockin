@@ -23,6 +23,6 @@ class InfoConfigure extends Component {
       {{/each-in}}
     `
   }
-};
+}
 
 export default connect(stateToComputed, dispatchToActions)(InfoConfigure);
