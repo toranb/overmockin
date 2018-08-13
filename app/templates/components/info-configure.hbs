@@ -1,6 +1,0 @@
-{{#each-in configuration as |key option|}}
-  <div test-id="configOption">
-    <label for={{key}}>{{option.column}}</label>
-    <input onclick={{action "toggle" key}} id={{key}} type="checkbox" checked={{option.active}}>
-  </div>
-{{/each-in}}
