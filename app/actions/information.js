@@ -1,6 +1,6 @@
 import fetch from 'fetch';
 
-export function toggle(id) {
+export const toggle = function(id) {
   return dispatch => {
     fetch(`/api/configuration/toggle/${id}`, {method: 'POST'})
       .then(fetched => fetched.json())
