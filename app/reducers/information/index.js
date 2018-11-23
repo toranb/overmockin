@@ -3,13 +3,14 @@ import keyBy from 'lodash/keyBy';
 import defaults from 'lodash/defaults';
 import mapValues from 'lodash/mapValues';
 import { createSelector } from 'reselect';
+import Immutable from 'seamless-immutable';
 
-const initialState = {
+const initialState = Immutable({
   all: undefined,
   selectedItem: undefined,
   configuration: undefined,
   itemz: []
-};
+});
 
 export default function information(state, action) {
   switch (action.type) {

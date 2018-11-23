@@ -45,3 +45,8 @@ module('Integration | Component | info configure spy test', function(hooks) {
     actionStub.restore();
   });
 });
+
+
+
+
+

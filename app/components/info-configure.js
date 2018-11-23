@@ -1,12 +1,16 @@
 import { connect } from 'ember-redux';
 import { getConfiguration } from '../reducers/information/selectors';
-import { toggle } from '../actions/information';
 import hbs from 'htmlbars-inline-precompile';
 import Component from '@ember/component';
+import { toggle } from '../actions/information';
 
 const stateToComputed = state => ({
   configuration: getConfiguration(state)
 });
+
+// const dispatchToActions = dispatch => ({
+//   toggle: (id) => dispatch({ type: 'TOGGLE_CONFIG_ASYNC', id })
+// });
 
 const dispatchToActions = {
   toggle

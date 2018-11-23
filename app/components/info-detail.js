@@ -3,6 +3,7 @@ import { all, activeItem } from '../reducers/information';
 import Component from '@ember/component';
 import hbs from 'htmlbars-inline-precompile';
 import { computed } from '@ember-decorators/object';
+import { htmlSafe } from '@ember/string';
 
 const stateToComputed = state => ({
   items: all(state),
@@ -14,7 +15,8 @@ class InfoDetail extends Component {
   @computed('items')
   get width() {
     const items = this.get('items');
-    return items ? (Object.keys(items).length / 10) * 100 : 0;
+    const width = items ? (Object.keys(items).length / 10) * 100 : 0;
+    return htmlSafe(`width: ${width}%`);
   }
 
   get layout() {
@@ -23,7 +25,7 @@ class InfoDetail extends Component {
         <div test-id="{{key}}Info">{{key}}: {{value}}</div>
       {{/each-in}}
       <div class="progress">
-        <div style="width: {{width}}%" test-id="progress" class="progress-bar"></div>
+        <div style={{width}} test-id="progress" class="progress-bar"></div>
       </div>
       {{#link-to "information.detail.configure" item.id test-id="configureLink"}}configure{{/link-to}}
     `
