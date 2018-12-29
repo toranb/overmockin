@@ -583,6 +583,12 @@ babel-plugin-debug-macros@^0.1.10, babel-plugin-debug-macros@^0.1.11:
   dependencies:
     semver "^5.3.0"
 
+babel-plugin-debug-macros@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.2.0.tgz#0120ac20ce06ccc57bf493b667cf24b85c28da7a"
+  dependencies:
+    semver "^5.3.0"
+
 babel-plugin-debug-macros@^0.2.0-beta.6:
   version "0.2.0-beta.6"
   resolved "https://registry.npmjs.org/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.2.0-beta.6.tgz#ecdf6e408d5c863ab21740d7ad7f43f027d2f912"
@@ -594,6 +600,12 @@ babel-plugin-ember-modules-api-polyfill@^2.3.2:
   resolved "https://registry.npmjs.org/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-2.3.2.tgz#56ea34bea963498d070a2b7dc2ce18a92c434093"
   dependencies:
     ember-rfc176-data "^0.3.0"
+
+babel-plugin-ember-modules-api-polyfill@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.npmjs.org/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-2.6.0.tgz#9524a65ef0c31ee82536a19c243fbaec1b977cbb"
+  dependencies:
+    ember-rfc176-data "^0.3.6"
 
 babel-plugin-htmlbars-inline-precompile@^0.2.5:
   version "0.2.5"
@@ -1108,6 +1120,21 @@ broccoli-asset-rewrite@^1.1.0:
 broccoli-babel-transpiler@^6.0.0, broccoli-babel-transpiler@^6.4.5:
   version "6.4.5"
   resolved "https://registry.npmjs.org/broccoli-babel-transpiler/-/broccoli-babel-transpiler-6.4.5.tgz#caab4a3b18d2a819fdd56e1ac3a37e8164ad4272"
+  dependencies:
+    babel-core "^6.26.0"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-persistent-filter "^1.4.3"
+    clone "^2.0.0"
+    hash-for-dep "^1.2.3"
+    heimdalljs-logger "^0.1.7"
+    json-stable-stringify "^1.0.0"
+    rsvp "^4.8.2"
+    workerpool "^2.3.0"
+
+broccoli-babel-transpiler@^6.5.0:
+  version "6.5.1"
+  resolved "https://registry.npmjs.org/broccoli-babel-transpiler/-/broccoli-babel-transpiler-6.5.1.tgz#a4afc8d3b59b441518eb9a07bd44149476e30738"
   dependencies:
     babel-core "^6.26.0"
     broccoli-funnel "^2.0.1"
@@ -2154,6 +2181,24 @@ ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-be
     ember-cli-version-checker "^2.1.2"
     semver "^5.5.0"
 
+ember-cli-babel@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-6.18.0.tgz#3f6435fd275172edeff2b634ee7b29ce74318957"
+  dependencies:
+    amd-name-resolver "1.2.0"
+    babel-plugin-debug-macros "^0.2.0-beta.6"
+    babel-plugin-ember-modules-api-polyfill "^2.6.0"
+    babel-plugin-transform-es2015-modules-amd "^6.24.0"
+    babel-polyfill "^6.26.0"
+    babel-preset-env "^1.7.0"
+    broccoli-babel-transpiler "^6.5.0"
+    broccoli-debug "^0.6.4"
+    broccoli-funnel "^2.0.0"
+    broccoli-source "^1.1.0"
+    clone "^2.0.0"
+    ember-cli-version-checker "^2.1.2"
+    semver "^5.5.0"
+
 ember-cli-broccoli-sane-watcher@^2.0.4:
   version "2.1.1"
   resolved "https://registry.npmjs.org/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-2.1.1.tgz#1687adada9022de26053fba833dc7dd10f03dd08"
@@ -2437,6 +2482,14 @@ ember-compatibility-helpers@^1.0.0:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
+ember-compatibility-helpers@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/ember-compatibility-helpers/-/ember-compatibility-helpers-1.1.2.tgz#ae0ee4a7a2858b5ffdf79b428c23aee85c47d93d"
+  dependencies:
+    babel-plugin-debug-macros "^0.2.0"
+    ember-cli-version-checker "^2.1.1"
+    semver "^5.4.1"
+
 ember-decorators@^2.0.0-beta.2:
   version "2.2.0"
   resolved "https://registry.npmjs.org/ember-decorators/-/ember-decorators-2.2.0.tgz#954d70652d74f3ddb789dc23fb8c7cd0b555edb6"
@@ -2552,11 +2605,12 @@ ember-redux-thunk-shim@^2.5.0:
     broccoli-merge-trees "^1.1.4"
     ember-cli-babel "^6.8.2"
 
-ember-redux@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/ember-redux/-/ember-redux-4.0.0.tgz#e98b394b7ac18483a434184e160bff21f8061772"
+ember-redux@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/ember-redux/-/ember-redux-4.0.1.tgz#861396f59ae26a94a29d86f5d31bc4e3fda1e5d6"
   dependencies:
-    ember-cli-babel "^6.8.2"
+    ember-cli-babel "^6.18.0"
+    ember-compatibility-helpers "^1.1.2"
 
 ember-reselect-shim@^2.0.0:
   version "2.0.0"
@@ -2580,6 +2634,10 @@ ember-resolver@^4.0.0:
 ember-rfc176-data@^0.3.0, ember-rfc176-data@^0.3.1, ember-rfc176-data@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npmjs.org/ember-rfc176-data/-/ember-rfc176-data-0.3.3.tgz#27fba08d540a7463a4366c48eaa19c5a44971a39"
+
+ember-rfc176-data@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.npmjs.org/ember-rfc176-data/-/ember-rfc176-data-0.3.6.tgz#7138db8dfccec39c9a832adfbd4c49d670028907"
 
 ember-router-generator@^1.2.3:
   version "1.2.3"
